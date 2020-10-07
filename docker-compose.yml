@@ -1,0 +1,30 @@
+version: "3.8"
+
+networks:
+  expenses:
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=expenses_db
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=secret
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql_data/5.7:/var/lib/mysql
+    networks:
+      - expenses
+  
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes: 
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
