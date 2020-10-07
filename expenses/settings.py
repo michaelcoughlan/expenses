@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'expenses.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'expenses_db',
+        'USER': 'user',
+        'PASSWORD': 'secret',
+        'HOST': 'db',
+        'PORT': 3306,
     }
 }
 
